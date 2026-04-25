@@ -21,3 +21,8 @@ CONNECTION_STR= *your connection link*
 JWT_SECRET= *JWT secret*
 
 copy this and add the secret keys
+
+example:
+PORT=5000
+CONNECTION_STR=postgresql://***********
+JWT_SECRET=KMU******************
