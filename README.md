@@ -1,5 +1,5 @@
-Project Name: Assignment
-Live URL: 
+Project Name: Vehicle Rental System
+Assignment Live URL: https://vehicle-rental-system-navy.vercel.app/
 
 Features & Technology Stack: 
 ├── @types/express@5.0.6
