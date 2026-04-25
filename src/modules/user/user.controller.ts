@@ -41,7 +41,7 @@ const getUser = async (req: Request, res: Response)=>{
 
 const deleteUser = async (req:Request , res: Response)=>{
       try {
-    const result =await userServices.deleteUser(req.params.id as string)
+    const result =await userServices.deleteUser(req.params.userId as string)
 
     if (result.rowCount === 0) {
       return res.status(404).json({

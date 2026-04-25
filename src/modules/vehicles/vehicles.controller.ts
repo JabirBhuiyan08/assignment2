@@ -22,8 +22,8 @@ const getVehicles = async(req: Request, res: Response) =>{
     try{
         const result = await vehiclesService.getVehicles()
       res.status(200).json({
-      success: false,
-      message: "Users Retrieved successfully",
+      success: true,
+      message: "Vehicles Retrieved successfully",
       data: result.rows,
 
     })  
@@ -40,16 +40,16 @@ const getVehicles = async(req: Request, res: Response) =>{
 const getSingleVehicles = async (req: Request, res: Response) => {
 
   try {
-    const result = await vehiclesService.getSingleVehicles(req.params.id as string);
+    const result = await vehiclesService.getSingleVehicles(req.params.vehicleId as string);
     if (result.rows.length === 0) {
       res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "Vehicle not found",
       })
     } else {
       res.status(200).json({
         success: true,
-        message: "User fetched Successfully",
+        message: "Vehicle fetched Successfully",
         data: result.rows[0],
       })
     }
@@ -67,17 +67,17 @@ const getSingleVehicles = async (req: Request, res: Response) => {
 const updateVehicles = async (req: Request, res: Response) => {
   const { vehicle_name, type, registration_number, daily_rent_price, availability_status } = req.body
   try {
-    const result =await vehiclesService.updateVehicles(vehicle_name, type, registration_number, daily_rent_price, availability_status,req.params.id as string)
+    const result =await vehiclesService.updateVehicles(vehicle_name, type, registration_number, daily_rent_price, availability_status,req.params.vehicleId as string)
 
     if (result.rows.length === 0) {
       res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "Vehicle not found",
       })
     } else {
       res.status(200).json({
         success: true,
-        message: "User updated Successfully",
+        message: "Vehicle updated Successfully",
         data: result.rows[0],
       })
     }
@@ -94,18 +94,18 @@ const updateVehicles = async (req: Request, res: Response) => {
 
     const deleteVehicles =async (req: Request, res: Response) => {
   try {
-    const result =await vehiclesService.deleteVehicles(req.params.id as string)
+    const result =await vehiclesService.deleteVehicles(req.params.vehicleId as string)
 
     if (result.rowCount === 0) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "Vehicle not found",
       });
     }
 
     return res.status(200).json({
       success: true,
-      message: "User Deleted Successfully",
+      message: "Vehicle Deleted Successfully",
       data: result.rows[0],
     });
       } catch (err: any) {

@@ -4,6 +4,8 @@ import config from "./config";
 import logger from "./middleware/logger";
 import { userRoutes } from "./modules/user/user.routes";
 import { vehiclesRouter } from "./modules/vehicles/vehicles.routes";
+import { bookingRouter } from "./modules/bookings/booking.router";
+import { authRoutes } from "./modules/auth/auth.router";
 
 
 
@@ -21,11 +23,13 @@ app.get('/', logger, (req: Request, res: Response) => {
 })
 
 //users part
-app.use("/api/v1/auth/", userRoutes )
+app.use("/api/v1/auth/", userRoutes );
 
-app.use("/api/v1", vehiclesRouter )
+app.use("/api/v1", vehiclesRouter );
 
-app.use("/api/v1",)
+app.use("/api/v1",bookingRouter);
+
+app.use("/auth", authRoutes);
 
 app.use((req, res)=>{
   res.status(404).json({

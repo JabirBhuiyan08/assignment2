@@ -1,16 +1,16 @@
 import express from "express"
 import { userControllers } from "./user.controller"
+import auth from "../../middleware/auth"
 
 const router = express.Router()
 
-
-// create new user
+// Public registration (creates 'user' role by default)
 router.post("/signup", userControllers.createUser)
 
-//get all users
-router.get('/users', userControllers.getUser)
+// Admin-only: view all users
+router.get('/users', auth("admin"), userControllers.getUser)
 
-//delete single user
-router.delete('/users/:id', userControllers.deleteUser)
+// Admin-only: delete users
+router.delete('/users/:userId', auth("admin"), userControllers.deleteUser)
 
 export const userRoutes = router
