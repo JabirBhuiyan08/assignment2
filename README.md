@@ -1,5 +1,6 @@
-Project Name: Assignment
-Live URL: 
+Project Name: Vehicle Rental System
+Assignment Live URL: https://vehicle-rental-system-navy.vercel.app/
+
 
 Features & Technology Stack: 
 ├── @types/express@5.0.6
@@ -21,3 +22,8 @@ CONNECTION_STR= *your connection link*
 JWT_SECRET= *JWT secret*
 
 copy this and add the secret keys
+
+example:
+PORT=5000
+CONNECTION_STR=postgresql://***********
+JWT_SECRET=KMU******************
