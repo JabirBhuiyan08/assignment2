@@ -4,13 +4,13 @@ import auth from "../../middleware/auth"
 
 const router = express.Router()
 
-// Public registration (creates 'user' role by default)
-router.post("/signup", userControllers.createUser)
-
 // Admin-only: view all users
-router.get('/users', auth("admin"), userControllers.getUser)
+router.get('/', auth("admin"), userControllers.getUser)
+
+// Admin or Own: update user details
+router.put('/:userId', auth("admin", "user"), userControllers.updateUser)
 
 // Admin-only: delete users
-router.delete('/users/:userId', auth("admin"), userControllers.deleteUser)
+router.delete('/:userId', auth("admin"), userControllers.deleteUser)
 
 export const userRoutes = router

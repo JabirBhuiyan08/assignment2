@@ -26,8 +26,47 @@ const deleteUser = async(id: string) => {
     return result;
 }
 
+const updateUser = async(id: string, name?: string, email?: string, phone?: string, role?: string) => {
+    const updateFields = [];
+    const values = [];
+    let paramCount = 1;
+
+    if (name !== undefined) {
+        updateFields.push(`name = $${paramCount}`);
+        values.push(name);
+        paramCount++;
+    }
+    if (email !== undefined) {
+        updateFields.push(`email = $${paramCount}`);
+        values.push(email);
+        paramCount++;
+    }
+    if (phone !== undefined) {
+        updateFields.push(`phone = $${paramCount}`);
+        values.push(phone);
+        paramCount++;
+    }
+    if (role !== undefined) {
+        updateFields.push(`role = $${paramCount}`);
+        values.push(role);
+        paramCount++;
+    }
+
+    if (updateFields.length === 0) {
+        throw new Error('No valid fields to update');
+    }
+
+    values.push(id);
+    const result = await pool.query(
+        `UPDATE users SET ${updateFields.join(', ')}, updated_at = NOW() WHERE id = $${paramCount} RETURNING *`,
+        values
+    );
+    return result;
+}
+
 export const userServices = {
     createUser,
     getUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }

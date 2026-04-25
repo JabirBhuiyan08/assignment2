@@ -1,0 +1,6 @@
+
+> assignment2@1.0.0 dev
+> npx tsx watch ./src/server.ts
+
+[dotenv@17.2.3] injecting env (3) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+Example app listening on port 5000

@@ -19,17 +19,18 @@ initDB()
 
 
 app.get('/', logger, (req: Request, res: Response) => {
-  res.send('Working !')
+  res.send('This Port is Working !')
 })
 
+//auth routes
+app.use("/api/v1/auth/", authRoutes);
+
 //users part
-app.use("/api/v1/auth/", userRoutes );
+app.use("/api/v1/users", userRoutes);
 
-app.use("/api/v1", vehiclesRouter );
+app.use("/api/v1", vehiclesRouter);
 
-app.use("/api/v1",bookingRouter);
-
-app.use("/auth", authRoutes);
+app.use("/api/v1", bookingRouter);
 
 app.use((req, res)=>{
   res.status(404).json({

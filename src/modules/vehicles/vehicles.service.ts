@@ -38,7 +38,17 @@ const getSingleVehicles = async( id: string)=>{
 //delete single vehicles
 
 const deleteVehicles = async (id: string)=>{
-    const result = await pool.query(`DELETE FROM vehicles WHERE id= $1`, [id]);
+    // Check if vehicle has active bookings
+    const activeBookings = await pool.query(
+        `SELECT id FROM bookings WHERE vehicle_id = $1 AND status = 'active' AND rent_end_date >= CURRENT_DATE`,
+        [id]
+    );
+
+    if (activeBookings.rows.length > 0) {
+        throw new Error('Cannot delete vehicle with active bookings');
+    }
+
+    const result = await pool.query(`DELETE FROM vehicles WHERE id= $1 RETURNING *`, [id]);
     return result;
 }
 

@@ -1,9 +1,13 @@
 import { Router } from "express";
 import { authController } from "./auth.controller";
+import { userControllers } from "../user/user.controller";
 
 const router = Router();
 
-// http://localhost:5000/auth/login
-router.post("/login", authController.loginUser);
+// Public: Register new user account
+router.post("/signup", userControllers.createUser);
+
+// Public: Login and receive JWT token
+router.post("/signin", authController.signinUser);
 
 export const authRoutes = router;
